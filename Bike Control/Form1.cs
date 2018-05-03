@@ -29,7 +29,7 @@ namespace Bike_Control
             dataGridView1.Rows.Add(codigo,marca,aro,"Disponible",costo,"arrendar");
             panel1.Visible = false;
         }
-
+        //asdasd
         private void label7_Click(object sender, EventArgs e) => panel1.Visible = false;
     }
 }
