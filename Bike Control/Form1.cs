@@ -31,5 +31,11 @@ namespace Bike_Control
         }
 
         private void label7_Click(object sender, EventArgs e) => panel1.Visible = false;
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Nos va a servir para finalizar la aplicacion 
+            Application.Exit();//dd
+        }
     }
 }
