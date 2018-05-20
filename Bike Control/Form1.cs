@@ -45,6 +45,14 @@ namespace Bike_Control
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
+            panel2.Visible = false;
 
         }
     }
