@@ -23,10 +23,51 @@ namespace Bike_Control
         {
 
             string codigo = textBox1.Text;
+            //Validación codigo
+            codigo.Trim();
+            bool valido = true;
+            int i = 0;
+            while (i < codigo.LongCount() && valido)
+            {
+                if (codigo[i] < 48 || codigo[i] > 57)
+                {
+                    valido = false;
+                    textBox8.Text = "Fallo en código";
+                }
+                i++;
+            }
             string marca = textBox2.Text;
+            //Marca no necesita validación
             string aro = textBox3.Text;
-            string costo=String.Concat("$ ",textBox4.Text," /hr");
-            dataGridView1.Rows.Add(codigo,marca,aro,"Disponible",costo);
+            //Validación Aro
+            aro.Trim();
+            i = 0;
+            while (i < aro.LongCount() && valido)
+            {
+                textBox8.Text = Convert.ToInt32(aro[i]).ToString();
+                if (aro[i] < 48 || aro[i] > 57)
+                {
+                    valido = false;
+                    textBox8.Text = "Fallo en aro";
+                }
+                i++;
+            }
+            string costo = textBox4.Text;
+            //Validación costo
+            costo.Trim();
+            i = 0;
+            while (i < costo.LongCount() && valido)
+            {
+                textBox8.Text = Convert.ToInt32(costo[i]).ToString();
+                if (costo[i] < 48 || costo[i] > 57)
+                {
+                    valido = false;
+                    textBox8.Text = "Fallo en costo";
+                }
+                i++;
+            }
+            costo= String.Concat("$ ",costo, " /hr");
+            if (valido) dataGridView1.Rows.Add(codigo, marca, aro, "Disponible", costo);
             textBox1.Text = "";
             textBox2.Text = "";
             textBox3.Text = "";
@@ -43,8 +84,29 @@ namespace Bike_Control
             panel1.Visible = false;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //El try es por si hacen click en los headers de el datagridview, ya que eso provoca una excepción no controlada
+            try
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                string estado = row.Cells[3].Value.ToString();
+                textBox8.Text = estado;
+                if (estado == "Disponible")
+                {
+                    panel2.Visible = true;
+                }
+                else if (estado == "En Arriendo")
+                {
+                    panel1.Visible = false;
+                    panel2.Visible = false;
+                    panel3.Visible = true;
+                    panel4.Visible = true;
+                }
+            }
+            catch
+            {
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -54,6 +116,25 @@ namespace Bike_Control
             textBox7.Text = "";
             panel2.Visible = false;
 
+        }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
+            panel2.Visible = false;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panel3.Visible = false;
         }
     }
 }
